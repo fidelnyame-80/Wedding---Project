@@ -1,44 +1,48 @@
+import Reveal from "../components/Reveal";
+
 export default function Photo() {
   return (
     <section
       id="photo"
       className="max-w-4xl mx-auto px-6 py-20"
     >
-      <h2 className="text-5xl font-serif text-center mb-12 text-[#6d5d4b]">
-        Photo
-      </h2>
+      <Reveal>
+        <h2 className="section-title mb-12 text-5xl">
+          Photo
+        </h2>
+      </Reveal>
 
-      <div className="bg-[#faf8f4] border border-[#e9e3d8] rounded-3xl p-10 text-center">
+      <Reveal className="bg-[#fbf6f9] border border-[#ead9e3] rounded-3xl p-10 text-center" delay={0.08}>
 
         <div className="space-y-3">
 
-          <p className="text-gray-600">
+          <p className="text-xl text-[#5f535a]">
             Guest Help
           </p>
 
-          <p className="text-gray-600">
+          <p className="text-xl text-[#5f535a]">
             About
           </p>
 
-          <p className="text-gray-600">
+          <p className="text-xl text-[#5f535a]">
             Browse Designs
           </p>
 
         </div>
 
         <div className="my-10">
-          <h3 className="text-3xl font-semibold text-[#6d5d4b]">
+          <h3 className="text-4xl font-semibold text-[#8f5f7f]">
             20th June 2026
           </h3>
         </div>
 
         <button
-          className="px-8 py-3 bg-[#6d5d4b] text-white rounded-full hover:opacity-90 transition"
+          className="rounded-full bg-[#8f5f7f] px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[#D4AF37]"
         >
           Unlock Guest Detail
         </button>
 
-      </div>
+      </Reveal>
     </section>
   );
 }

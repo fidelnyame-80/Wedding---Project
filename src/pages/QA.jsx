@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import Reveal from "../components/Reveal";
 
 export default function QA() {
   const [open, setOpen] = useState(null);
@@ -56,11 +57,11 @@ export default function QA() {
     <div>
       <section className="max-w-4xl mx-auto px-6 py-16">
 
-        <h2 className="text-5xl font-serif text-center mb-4 text-[#6d5d4b]">
+        <h2 className="section-title mb-4 text-5xl">
           Q & A
         </h2>
 
-        <p className="text-center text-gray-600 mb-12">
+        <p className="text-center text-xl text-[#5f535a] mb-12">
           If you’ve got questions, friends and family,
           have a look at our Q & A first!
         </p>
@@ -70,25 +71,25 @@ export default function QA() {
           {questions.map((item, index) => (
             <div
               key={index}
-              className="border border-[#e9e3d8] rounded-xl overflow-hidden"
+              className="overflow-hidden border-b border-[#ead9e3]"
             >
               <button
                 onClick={() =>
                   setOpen(open === index ? null : index)
                 }
-                className="w-full flex justify-between items-center p-5 text-left bg-white hover:bg-[#faf8f4]"
+                className="w-full flex justify-between items-center px-0 py-5 text-left bg-white hover:text-[#8f5f7f]"
               >
-                <span className="font-medium">
+                <span className="text-2xl font-semibold text-[#4c3f46]">
                   {item.question}
                 </span>
 
-                <span className="text-xl">
+                <span className="text-2xl text-[#D4AF37]">
                   {open === index ? "−" : "+"}
                 </span>
               </button>
 
               {open === index && (
-                <div className="p-5 bg-[#faf8f4] text-gray-700 whitespace-pre-line leading-8">
+                <div className="pb-6 text-xl text-[#5f535a] whitespace-pre-line leading-9">
                   {item.answer}
                 </div>
               )}

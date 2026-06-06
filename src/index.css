@@ -1,4 +1,94 @@
 @import "tailwindcss";
+
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  color: #4c3f46;
+  font-family: "Cormorant Garamond", serif;
+}
+
+button,
+a,
+select {
+  font-family: "Cinzel", serif;
+}
+
+.section-title {
+  color: #8f5f7f;
+  display: inline-block;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  letter-spacing: 0.045em;
+  line-height: 1;
+  position: relative;
+}
+
+.section-title::after {
+  background: #d4af37;
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 18px auto 0;
+  width: 56px;
+}
+
+.typewriter-cursor {
+  animation: typewriter-cursor-blink 0.9s step-end infinite;
+}
+
+@keyframes typewriter-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.title-svg-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.title-svg-background__item {
+  position: absolute;
+  display: block;
+  opacity: 0.34;
+  transform: translate3d(0, 0, 0) rotate(var(--rotation)) scale(var(--scale));
+  transform-origin: center;
+  animation: title-svg-oscillate var(--duration) ease-in-out var(--delay) infinite alternate;
+}
+
+.title-svg-background__item svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes title-svg-oscillate {
+  from {
+    transform: translate3d(calc(var(--float-x) * -1), calc(var(--float-y) * -1), 0)
+      rotate(calc(var(--rotation) - 5deg))
+      scale(var(--scale));
+  }
+
+  to {
+    transform: translate3d(var(--float-x), var(--float-y), 0)
+      rotate(calc(var(--rotation) + 5deg))
+      scale(var(--scale));
+  }
+}
+
+@media (max-width: 767px) {
+  .title-svg-background__item {
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-svg-background__item {
+    animation: none;
+  }
 }

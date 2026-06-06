@@ -1,3 +1,5 @@
+import Reveal from "../components/Reveal";
+
 export default function Moments() {
   const photos = [
     {
@@ -37,19 +39,21 @@ export default function Moments() {
       id="moments"
       className="max-w-6xl mx-auto px-6 py-20"
     >
-      <h2 className="text-5xl font-serif text-center mb-4 text-[#6d5d4b]">
-        Moments
-      </h2>
+      <Reveal>
+        <h2 className="section-title mb-4 text-5xl">
+          Moments
+        </h2>
 
-      <p className="text-center text-gray-600 mb-12">
-        A collection of memories from our journey together.
-      </p>
+        <p className="text-center text-xl text-[#5f535a] mb-12">
+          A collection of memories from our journey together.
+        </p>
+      </Reveal>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Reveal className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" delay={0.08}>
         {photos.map((photo, index) => (
           <div
             key={index}
-            className="overflow-hidden rounded-2xl shadow-md bg-white"
+            className="overflow-hidden rounded-2xl shadow-md bg-white border border-[#ead9e3]"
           >
             <img
               src={photo.image}
@@ -58,13 +62,13 @@ export default function Moments() {
             />
 
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-center">
+              <h3 className="text-2xl font-semibold text-center text-[#4c3f46]">
                 {photo.title}
               </h3>
             </div>
           </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }

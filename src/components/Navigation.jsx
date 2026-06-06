@@ -34,6 +34,7 @@ export default function Navigation() {
       setActive(current);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () =>
@@ -49,7 +50,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 bg-white z-50 py-5">
+    <nav className="sticky top-0 bg-white z-50 hidden py-5 md:block">
       <div className="flex flex-wrap justify-center gap-8">
 
         {links.map((link) => (
@@ -60,8 +61,8 @@ export default function Navigation() {
             }
             className={`pb-1 transition-all ${
               active === link.id
-                ? "border-b-2 border-[#8B7355] text-[#8B7355]"
-                : "border-b-2 border-transparent hover:text-[#8B7355]"
+                ? "border-b-2 border-[#D4AF37] text-[#8f5f7f]"
+                : "border-b-2 border-transparent text-[#5c4a54] hover:text-[#8f5f7f]"
             }`}
           >
             {link.name}
