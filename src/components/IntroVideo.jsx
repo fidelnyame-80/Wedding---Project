@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import envelopeReveal from "../assets/envelope-reveal.mp4";
+import heroPoster from "../assets/hero.png";
 
 export default function IntroVideo({ isVisible, onDone }) {
+  useEffect(() => {
+    if (!isVisible) return undefined;
+
+    const fallback = window.setTimeout(onDone, 9000);
+
+    return () => window.clearTimeout(fallback);
+  }, [isVisible, onDone]);
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -17,11 +27,20 @@ export default function IntroVideo({ isVisible, onDone }) {
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster={heroPoster}
             onEnded={onDone}
             onError={onDone}
             aria-label="Envelope reveal intro"
           />
+
+          <button
+            type="button"
+            onClick={onDone}
+            className="absolute bottom-6 right-6 rounded-full border border-[#D4AF37]/80 bg-[#2b1725]/55 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#fff7e8] backdrop-blur-sm transition hover:bg-[#2b1725]/80"
+          >
+            Skip
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

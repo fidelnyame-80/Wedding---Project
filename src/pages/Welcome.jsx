@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Reveal from "../components/Reveal";
 import heroVideo from "../assets/hero-video.mp4";
+import heroPoster from "../assets/hero.png";
 
 const EVENT_DATE = new Date("2026-06-20T08:00:00");
 const HERO_TITLE = "Welcome to our wedding.";
@@ -68,6 +69,8 @@ export default function Welcome() {
             muted
             loop
             playsInline
+            preload="metadata"
+            poster={heroPoster}
             onCanPlay={() => setHeroVideoLoaded(true)}
             aria-label="Wedding hero video"
           >

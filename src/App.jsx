@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import IntroVideo from "./components/IntroVideo";
 import Home from "./pages/Home";
@@ -22,11 +21,7 @@ function App() {
         }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
+        <Home />
       </motion.div>
     </>
   );

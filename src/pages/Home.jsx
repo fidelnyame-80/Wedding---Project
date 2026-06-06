@@ -1,12 +1,18 @@
+import { Suspense, lazy } from "react";
 import Layout from "../components/Layout";
 
 import Welcome from "./Welcome";
-import Story from "./Story";
-import Schedule from "./Schedule";
-import ColorTheme from "./ColorTheme";
-import QA from "./QA";
-import Photo from "./Photo";
-import Moments from "./Moments";
+
+const Story = lazy(() => import("./Story"));
+const Schedule = lazy(() => import("./Schedule"));
+const ColorTheme = lazy(() => import("./ColorTheme"));
+const QA = lazy(() => import("./QA"));
+const Photo = lazy(() => import("./Photo"));
+const Moments = lazy(() => import("./Moments"));
+
+function SectionFallback() {
+  return <div className="min-h-32" aria-hidden="true" />;
+}
 
 export default function Home() {
   return (
@@ -15,29 +21,31 @@ export default function Home() {
         <Welcome />
       </section>
 
-      <section id="story">
-        <Story />
-      </section>
+      <Suspense fallback={<SectionFallback />}>
+        <section id="story">
+          <Story />
+        </section>
 
-      <section id="schedule">
-        <Schedule />
-      </section>
+        <section id="schedule">
+          <Schedule />
+        </section>
 
-      <section id="theme">
-        <ColorTheme />
-      </section>
+        <section id="theme">
+          <ColorTheme />
+        </section>
 
-      <section id="qa">
-        <QA />
-      </section>
+        <section id="qa">
+          <QA />
+        </section>
 
-      <section id="photo">
-        <Photo />
-      </section>
+        <section id="photo">
+          <Photo />
+        </section>
 
-      <section id="moments">
-        <Moments />
-      </section>
+        <section id="moments">
+          <Moments />
+        </section>
+      </Suspense>
     </Layout>
   );
 }
