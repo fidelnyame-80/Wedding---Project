@@ -2,10 +2,7 @@ import Reveal from "../components/Reveal";
 
 export default function Photo() {
   return (
-    <section
-      id="photo"
-      className="max-w-4xl mx-auto px-6 py-20"
-    >
+    <section className="max-w-4xl mx-auto px-6 py-20">
       <Reveal>
         <h2 className="section-title mb-12 text-5xl">
           Photo

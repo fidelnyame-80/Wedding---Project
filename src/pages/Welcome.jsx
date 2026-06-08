@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Reveal from "../components/Reveal";
-import heroVideo from "../assets/hero-video.mp4";
-import heroPoster from "../assets/hero.png";
+import heroImg from "../assets/heroImg.webp";
+import heroImg2 from "../assets/heroImg2.webp";
+import heroImg3 from "../assets/heroImg3.webp";
 
 const EVENT_DATE = new Date("2026-06-20T08:00:00");
 const HERO_TITLE = "Welcome to our wedding.";
+const HERO_IMAGES = [heroImg, heroImg2, heroImg3];
 
 function getCountdown() {
   const difference = Math.max(EVENT_DATE.getTime() - Date.now(), 0);
@@ -20,7 +22,7 @@ function getCountdown() {
 export default function Welcome() {
   const [countdown, setCountdown] = useState(getCountdown);
   const [typedHeroTitle, setTypedHeroTitle] = useState("");
-  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -31,13 +33,22 @@ export default function Welcome() {
   }, []);
 
   useEffect(() => {
-    if (!heroVideoLoaded) return undefined;
+    const interval = window.setInterval(() => {
+      setActiveHeroIndex((currentIndex) =>
+        (currentIndex + 1) % HERO_IMAGES.length
+      );
+    }, 3000);
 
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     let index = 0;
     let interval;
-    setTypedHeroTitle("");
 
-    const timeout = window.setTimeout(() => {
+    const startTyping = () => {
+      setTypedHeroTitle("");
+
       interval = window.setInterval(() => {
         index += 1;
         setTypedHeroTitle(HERO_TITLE.slice(0, index));
@@ -46,13 +57,19 @@ export default function Welcome() {
           window.clearInterval(interval);
         }
       }, 70);
-    }, 4000);
+    };
+
+    if (document.readyState === "complete") {
+      startTyping();
+    } else {
+      window.addEventListener("load", startTyping, { once: true });
+    }
 
     return () => {
-      window.clearTimeout(timeout);
+      window.removeEventListener("load", startTyping);
       window.clearInterval(interval);
     };
-  }, [heroVideoLoaded]);
+  }, []);
 
   return (
     <div>
@@ -62,20 +79,19 @@ export default function Welcome() {
           className="relative left-1/2 h-[520px] w-screen max-w-none -translate-x-1/2 overflow-hidden text-left shadow-md sm:left-auto sm:h-[560px] sm:w-full sm:translate-x-0 sm:rounded-lg"
           y={18}
         >
-          <video
-            src={heroVideo}
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={heroPoster}
-            onCanPlay={() => setHeroVideoLoaded(true)}
-            aria-label="Wedding hero video"
-          >
-            Your browser does not support the video tag.
-          </video>
+          {HERO_IMAGES.map((image, index) => (
+            <img
+              key={image}
+              src={image}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 lg:object-[0%15%] ${
+                activeHeroIndex === index ? "opacity-100" : "opacity-0"
+              }`}
+              alt={index === 0 ? "Wedding couple" : ""}
+              aria-hidden={index === 0 ? undefined : "true"}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+            />
+          ))}
 
           <div className="absolute inset-0 bg-gradient-to-t from-[#2b1725]/90 via-[#2b1725]/45 to-black/10" />
 

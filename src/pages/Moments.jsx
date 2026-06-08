@@ -1,5 +1,9 @@
 import Reveal from "../components/Reveal";
 
+function getOptimizedImageUrl(url) {
+  return `${url}?auto=format&fit=crop&w=720&q=75`;
+}
+
 export default function Moments() {
   const photos = [
     {
@@ -35,10 +39,7 @@ export default function Moments() {
   ];
 
   return (
-    <section
-      id="moments"
-      className="max-w-6xl mx-auto px-6 py-20"
-    >
+    <section className="max-w-6xl mx-auto px-6 py-20">
       <Reveal>
         <h2 className="section-title mb-4 text-5xl">
           Moments
@@ -56,8 +57,10 @@ export default function Moments() {
             className="overflow-hidden rounded-2xl shadow-md bg-white border border-[#ead9e3]"
           >
             <img
-              src={photo.image}
+              src={getOptimizedImageUrl(photo.image)}
               alt={photo.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-80 object-cover hover:scale-105 transition duration-500"
             />
 

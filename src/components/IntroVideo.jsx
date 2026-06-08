@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import envelopeReveal from "../assets/envelope-reveal.mp4";
-import heroPoster from "../assets/hero.png";
+import heroPoster from "../assets/heroImg.webp";
 
 export default function IntroVideo({ isVisible, onDone }) {
   useEffect(() => {
